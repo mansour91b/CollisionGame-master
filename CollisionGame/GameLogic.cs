@@ -274,9 +274,11 @@ namespace CollisionGame
 
 
 
-
+            for (int i = 0; i < 10; i++)
+            {
                 addNew(new Enemy(player, null));
 
+            }
 
                 return player;
 
