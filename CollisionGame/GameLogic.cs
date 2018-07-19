@@ -254,7 +254,9 @@ namespace CollisionGame
         //The Max Levels of N
         int numberoflevels = 10;
         
-        public levelN(float timeOfStart) : base(timeOfStart) { }
+        public levelN(int howManyLevels, float timeOfStart) : base(timeOfStart) {
+            this.numberoflevels = howManyLevels;
+        }
 
         public override bool isLevelDone(float CurrentTime, int enemiesCount)
         {
@@ -274,7 +276,7 @@ namespace CollisionGame
 
 
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < numberoflevels; i++)
             {
                 addNew(new Enemy(player, null));
 
@@ -342,6 +344,7 @@ namespace CollisionGame
     */
     class GameLogic
     {
+        int levelsCompleted = 0;
         public delegate void AddNewObjectDelegate(GameObject o);
 
 
@@ -364,7 +367,7 @@ namespace CollisionGame
             //currentlevel = new Level1(0);
 
             // initilizing the start of the level
-            currentlevel = new levelN(0);
+            currentlevel = new levelN(levelsCompleted+1, 0);
 
             player = currentlevel.setupLevel(this.AddNewObject);
             all.Remove(player);
@@ -393,8 +396,9 @@ namespace CollisionGame
 
                 // currentlevel = new Level2(t);
                 // not too sure!
-                
-                currentlevel = new levelN(t);
+
+                levelsCompleted++;
+                currentlevel = new levelN((levelsCompleted + 1) * 5, t);
                 
 
 
